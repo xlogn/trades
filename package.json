@@ -5,8 +5,6 @@
   "scripts": {
     "simple": "clear && ts-node src/simple.ts",
     "test": "clear && ts-node src/test.ts",
-    "dev": "ts-node src/index.ts",
-    "start": "node dist/index.js",
     "build": "tsc"
   },
   "keywords": [],
