@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "simple": "clear && ts-node src/simple.ts",
+    "test": "clear && ts-node src/test.ts",
     "dev": "ts-node src/index.ts",
     "start": "node dist/index.js",
     "build": "tsc"
@@ -13,13 +14,11 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@types/express": "^5.0.1",
     "@types/node": "^22.14.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "express": "^5.1.0",
     "heap-js": "^2.6.0"
   }
 }
