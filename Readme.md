@@ -12,3 +12,12 @@ algo
 // catch is avoid same account trades, can be blocked by remving one of the same account trade
 // and checking if there is a progress that is being made, to make sure no inifite calls is done.
 // then push back all removed to it.
+```
+
+run
+```
+# to run main logic
+npm run simple
+
+# to run test cases
+npm run test
