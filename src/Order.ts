@@ -10,6 +10,21 @@ export interface Order {
   side: "BUY" | "SELL";
 }
 
+export interface Trade {
+  buy_order: Object;
+  sell_order: Object;
+  amountTraded: number;
+  sellingPrice: number;
+}
+
+export interface OrderBook {
+  order_id: string;
+  side: string;
+  amount: number;
+  price: number;
+  account_id: string;
+}
+
 const buyMaxHeapComparator = (a: Order, b: Order) => {
   return b.limit_price - a.limit_price;
 };
@@ -21,6 +36,8 @@ const sellMinHeapComparator = (a: Order, b: Order) => {
 export class OrderOrch {
   buyHeap = new Heap<Order>(buyMaxHeapComparator);
   sellHeap = new Heap<Order>(sellMinHeapComparator);
+  trades: Trade[] = [];
+  orderBook: OrderBook[] = [];
 
   addOrder(order: Order) {
     if (order.side == "BUY") {
@@ -60,6 +77,29 @@ export class OrderOrch {
               sell!.account_id
             } at price: ${sellingPrice}, quantity: ${quantity}`
           );
+          const trade: Trade = {
+            buy_order: buy!,
+            sell_order: sell!,
+            amountTraded: quantity,
+            sellingPrice: sellingPrice,
+          };
+          const buyerSideOrderEntry: OrderBook = {
+            order_id: buy!.order_id,
+            side: buy!.side,
+            price: sellingPrice,
+            amount: quantity,
+            account_id: buy!.account_id,
+          };
+          const sellerSideOrderEntry: OrderBook = {
+            order_id: sell!.order_id,
+            side: sell!.side,
+            price: sellingPrice,
+            amount: quantity,
+            account_id: sell!.account_id,
+          };
+          this.orderBook.push(buyerSideOrderEntry);
+          this.orderBook.push(sellerSideOrderEntry);
+          this.trades.push(trade);
           const leftOutBuyQuanity = buy!.amount - quantity;
           const leftOutSellQuantity = sell!.amount - quantity;
           if (leftOutBuyQuanity !== 0) {

@@ -26,3 +26,35 @@ const orderOrch = new OrderOrch();
 for (let x = 0; x < orderDataJSONList.length; x++) {
   orderOrch.addOrder(orderDataJSONList[x]);
 }
+
+// gets trades and wtie to a trafes.json
+const trades = orderOrch.trades;
+const orderbook = orderOrch.orderBook
+console.log(trades);
+console.log(orderbook);
+
+fs.writeFile(
+  "./src/proofOfWork/trades.json",
+  JSON.stringify(trades, null, 2),
+  "utf8",
+  (err) => {
+    if (err) {
+      console.error("Error writing file:", err);
+      return;
+    }
+    console.log("JSON file written successfully!");
+  }
+);
+
+fs.writeFile(
+    "./src/proofOfWork/orderbook.json",
+    JSON.stringify(orderbook, null, 2),
+    "utf8",
+    (err) => {
+      if (err) {
+        console.error("Error writing file:", err);
+        return;
+      }
+      console.log("JSON file written successfully!");
+    }
+  );
