@@ -21,3 +21,9 @@ npm run simple
 
 # to run test cases
 npm run test
+```
+
+algo video
+```
+https://www.youtube.com/watch?v=IQ___nu8baY
+```
